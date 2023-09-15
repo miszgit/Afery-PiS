@@ -3,6 +3,18 @@ import random
 from os import listdir
 from os.path import isfile, join
 
+# ---------------------------------------------
+# TODO
+# analiza czasowa?
+# konwersja do CSV?
+# kategoryzacja afer (wypowiedz, kradziez, itp.) 
+# kategoryzacja afer (dymisja, dymisja w normalnym kraju,)
+# kategoryzacja afer (wedlug galezi typu polityka spoleczna, gospodarka itp)
+# api?
+# zebrac afery od 2015?
+# ---------------------------------------------
+
+
 # pliki bez duplikatów
 files = [f for f in listdir(r"Afery PiS\DATY") if isfile(join(r"Afery PiS\DATY", f)) and "_" not in f]
 
