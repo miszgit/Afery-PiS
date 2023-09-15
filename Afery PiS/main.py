@@ -2,6 +2,7 @@ from tkinter import *
 import random
 from os import listdir
 from os.path import isfile, join
+from datetime import date
 
 # ---------------------------------------------
 # TODO
@@ -19,6 +20,7 @@ from os.path import isfile, join
 files = [f for f in listdir(r"Afery PiS\DATY") if isfile(join(r"Afery PiS\DATY", f)) and "_" not in f]
 
 #------------------------------------------------------
+
 # wylosowana afera
 def losuj_afere():
     opis_afery.config(state=NORMAL, width=100)
@@ -32,11 +34,15 @@ def losuj_afere():
         opis = ''.join([line for line in calosc[1:] if 'http' not in line])
         zrodla = '\n'.join([zrodlo for zrodlo in calosc if 'http' in zrodlo])
     data_afery.config(text=f"\n{data}", font=("Arial", 20))
+    date_list = data.split('.')
+    dt = date(int(date_list[2]),int(date_list[1]),int(date_list[0]))
     if len(opis) > 1:
-        opis_afery.insert("1.0", opis)
+        opis_afery.insert("1.0", opis.strip())
     else:
-        opis_afery.insert("1.0", "Niesamowite, dzień bez afery?")
-
+        if dt <= date.today():
+            opis_afery.insert("1.0", "Niesamowite, czyżby dzień bez afery?")
+        else:
+            opis_afery.insert("1.0","To dzień z przyszłości więc jeszcze nie ma codziennej afery.")
     opis_afery.config(state=DISABLED, font=("Arial", 14))
     zrodla_afery.insert(END, zrodla)
 #------------------------------------------------------
